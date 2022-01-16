@@ -17,7 +17,8 @@ namespace LMSCourses.Models
 
         public string Department { get; set; }
         public string Manager{ get; set; }
-        public Roles RoleId { get; set; }
+        public Roles Role { get; set; }
+
 
     }
 }

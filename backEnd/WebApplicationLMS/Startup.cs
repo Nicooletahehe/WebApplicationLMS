@@ -37,6 +37,7 @@ namespace WebApplicationLMS
             services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("CoursesApp")));
             services.AddScoped<ICourseRepo, CoursesRepo>();
+            services.AddScoped<IUserRepo, UsersRepo>();
 
             //JSON Serializer
             services.AddControllersWithViews().AddNewtonsoftJson(

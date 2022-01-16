@@ -18,7 +18,6 @@ namespace LMSCourses.Models
         {
             get
             {
-                //return _appDbContext.Users.Include(c =>c.Roles);
                 return _appDbContext.Courses;
             }
         }
