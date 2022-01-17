@@ -13,7 +13,7 @@ namespace LMSCourses.Models
         public string Avatar { get; set; }
 
         //[DataType(DataType.EmailAddress)]
-        //public object UsersEmail { get; set; }
+        public string Email { get; set; }
 
         public string Department { get; set; }
         public string Manager{ get; set; }

@@ -14,7 +14,7 @@ namespace LMSCourses.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class CoursesController : Controller
+    public class CoursesController : ControllerBase
     {
         private readonly ICourseRepo _coursesRepo;
 
@@ -26,9 +26,9 @@ namespace LMSCourses.Controllers
         }
 
         [HttpGet]
-        public JsonResult Get()
+        public IEnumerable<Courses> Get()
         {
-            return new JsonResult(_coursesRepo.AllCourses);
+            return _coursesRepo.AllCourses.ToArray();
         }
 
         [HttpGet("{id}")]
