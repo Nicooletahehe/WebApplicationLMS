@@ -3,19 +3,20 @@ import {api} from './API';
 import { CourseList } from "./models/CourseModel";
 
 export const Courses: React.FC = () => {
-    const [coursesArray, setCoursesArray] = useState([]);
+    const [coursesArray, setCoursesArray] = useState<CourseList[] | []>([]);;
     const [isLoaded, setIsLoaded] = useState(false);
 
     async function refreshList() {
-        setIsLoaded(true);
+        setIsLoaded(false);
         const response = await fetch(api.API_URL + 'courses');
         const data = await response.json();
         setCoursesArray(data);
+        // setIsLoaded(false);
     }
 
     useEffect(() => {
         refreshList();
-        setIsLoaded(false);
+        
     });
 
     console.log(isLoaded);
@@ -23,7 +24,6 @@ export const Courses: React.FC = () => {
         return <p>Loading ...</p>;
     } else {
         return <div>
-            <h3>This is Courses Page</h3>
             <table className="table table-striped">
                 <thead>
                     <tr>
@@ -40,7 +40,7 @@ export const Courses: React.FC = () => {
                             <td>{c["Id"]}</td>
                             <td>{c["Name"]}</td>
                             <td>{c["Description"]}</td>
-                            <td><img src={c["Image"]} alt="For course id:"/></td>
+                            <td><img src={c["Image"]} alt={"For course id: "+c["Id"]}/></td>
                             {/* <button type="button"
                                 className="btn btn-light mr-1"
                                 data-bs-toggle="modal"

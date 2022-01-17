@@ -3,11 +3,11 @@ import {api} from './API';
 import { UserList } from "./models/UserModel";
 
 export const User: React.FC = () => {
-    const [usersArray, setusersArray] = useState([]);
+    const [usersArray, setusersArray] = useState<UserList[] | []>([]);
     const [isLoaded, setIsLoaded] = useState(false);
 
     async function refreshList() {
-        setIsLoaded(true);
+        setIsLoaded(false);
         const response = await fetch(api.API_URL + 'users');
         console.log(response);
         const data = await response.json();
@@ -18,7 +18,6 @@ export const User: React.FC = () => {
 
     useEffect(() => {
         refreshList();
-        setIsLoaded(false);
     });
 
     console.log(isLoaded);
@@ -26,11 +25,10 @@ export const User: React.FC = () => {
         return <p>Loading ...</p>;
     } else {
         return <div>
-            <h3>This is users Page</h3>
             <table className="table table-striped">
                 <thead>
                     <tr>
-                        <th>Id</th>
+                        <th>Avatar</th>
                         <th>Name</th>
                         <th>Email</th>
                         <th>Department</th>
@@ -42,7 +40,7 @@ export const User: React.FC = () => {
                 <tbody>
                     {usersArray.map(user => (
                         <tr key = {user["Id"]}>
-                            <td><img src={user["Avatar"]}/></td>
+                            <td><img src={user["Avatar"]} alt={"Avatar for user: "+user["Id"]}/></td>
                             <td>{user["Name"]}</td>
                             <td>{user["Email"]}</td>
                             <td>{user["Department"]}</td>
